@@ -9,12 +9,28 @@ const livekitUrl = `wss://${localIp}:7880`;
 const joinBtn = document.getElementById("joinBtn")! as HTMLButtonElement;
 const leaveBtn = document.getElementById("leaveBtn")! as HTMLButtonElement;
 const username = document.getElementById("username") as HTMLInputElement;
+const roomInput = document.getElementById("roomId") as HTMLInputElement | null;
 const statusDiv = document.getElementById("status")!;
 const participantsDiv = document.getElementById("participants")!;
 const remoteName = document.getElementById("remoteName")!;
 
+// Add Enter key listener to username input
+username.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    joinBtn.click();
+  }
+});
+
 // Room instance (singleton)
 let room: Room | null = null;
+
+// Generate and auto-fill room ID on page load
+function initializeRoomId() {
+  if (roomInput && !roomInput.value.trim()) {
+    const randomId = Math.floor(Math.random() * 9000) + 1000;
+    roomInput.value = randomId.toString();
+  }
+}
 
 // Update UI status
 function updateStatus(status: "connected" | "disconnected", message: string) {
@@ -59,7 +75,14 @@ joinBtn.onclick = async () => {
     updateStatus("disconnected", "Connecting...");
     console.log(`Connecting as: ${identity}`);
     
-    const token = await getToken(identity, "testroom");
+    // Use room ID from input
+    const roomName = roomInput?.value.trim();
+    if (!roomName) {
+      alert("Room ID is required");
+      return;
+    }
+    
+    const token = await getToken(identity, roomName);
     room = new Room();
     
     // Event: Remote track subscribed (video or audio from other participants)
@@ -162,3 +185,4 @@ async function getToken(identity: string, room: string) {
 // Initialize status
 updateStatus("disconnected", "Disconnected");
 
+initializeRoomId();

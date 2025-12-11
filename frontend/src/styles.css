@@ -63,6 +63,14 @@ input {
   transition: all 0.3s;
 }
 
+#roomId {
+  flex: 0 0 auto;
+  min-width: auto;
+  width: 120px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
 input::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
