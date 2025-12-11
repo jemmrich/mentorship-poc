@@ -2,7 +2,7 @@ import { serveTls } from "./deps.ts";
 import { PORT } from "./env.ts";
 import { tokenHandler } from "./routes/token.ts";
 
-console.log(`Backend running on https://192.168.2.65:${PORT}`);
+console.log(`Backend running on https://0.0.0.0:${PORT}`);
 
 // CORS headers to allow frontend access from any origin
 const corsHeaders = {
@@ -40,6 +40,6 @@ serveTls(async (req) => {
 }, { 
   hostname: "0.0.0.0",
   port: PORT,
-  certFile: "../certs/192.168.2.65.pem",
-  keyFile: "../certs/192.168.2.65-key.pem",
+  certFile: "../certs/cert.pem",
+  keyFile: "../certs/cert-key.pem",
 });

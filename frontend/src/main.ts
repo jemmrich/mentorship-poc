@@ -1,8 +1,9 @@
 import { Room, RoomEvent, Track } from "livekit-client";
 
 // Configuration - Use HTTPS for all services (Caddy proxies LiveKit with TLS)
-const backendUrl = `https://192.168.2.65:3001/token`;
-const livekitUrl = `wss://192.168.2.65:7880`;
+const localIp = "192.168.2.65";
+const backendUrl = `https://${localIp}:3001/token`;
+const livekitUrl = `wss://${localIp}:7880`;
 
 // DOM elements
 const joinBtn = document.getElementById("joinBtn")! as HTMLButtonElement;

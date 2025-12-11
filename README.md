@@ -90,11 +90,11 @@ mkcert -install
 
 # Generate certificates for your local IP
 # Replace 192.168.2.65 with your actual local IP address
-mkcert 192.168.2.65
+mkcert -cert-file cert.pem -key-file cert-key.pem 192.168.2.65
 
 # Move certificates to the certs directory
 mkdir -p certs
-mv 192.168.2.65*.pem certs/
+mv cert*.pem certs/
 ```
 
 > **Note**: To find your local IP on macOS, run: `ipconfig getifaddr en0`
@@ -201,8 +201,8 @@ npm run dev
 │   ├── docker-compose.yml
 │   └── livekit.yaml     # LiveKit configuration
 ├── certs/               # SSL certificates
-│   ├── 192.168.2.65.pem
-│   └── 192.168.2.65-key.pem
+│   ├── cert.pem
+│   └── cert-key.pem
 └── Caddyfile           # Caddy reverse proxy config
 ```
 

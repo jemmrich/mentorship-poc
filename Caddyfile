@@ -1,9 +1,9 @@
 # Caddy reverse proxy configuration
 # Provides TLS termination for LiveKit WebSocket connections
 
-192.168.2.65:7880 {
+:7880 {
   # Use self-signed certificates for local development
-  tls ./certs/192.168.2.65.pem ./certs/192.168.2.65-key.pem
+  tls ./certs/cert.pem ./certs/cert-key.pem
   
   # Enable CORS for frontend access
   header {
