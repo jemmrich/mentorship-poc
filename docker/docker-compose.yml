@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Redis for LiveKit state management
+  redis:
+    image: redis:7-alpine
+    container_name: livekit-redis
+    restart: always
+
+  # LiveKit WebRTC SFU server
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: livekit-server
+    restart: always
+    depends_on:
+      - redis
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
+    command:
+      - --config
+      - /etc/livekit.yaml
+    ports:
+      # WebSocket port (proxied by Caddy with TLS)
+      - "7881:7880"
+      # RTC port for TURN server
+      - "7882:7882/udp"
+      # UDP port range for WebRTC media
+      - "50000-50100:50000-50100/udp"

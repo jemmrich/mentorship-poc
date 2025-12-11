@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LiveKit Video Chat Demo</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📹 LiveKit Video Chat</h1>
+        <p class="subtitle">Connect with another device for a live video call</p>
+      </header>
+
+      <div class="controls">
+        <div class="input-group">
+          <input id="username" placeholder="Enter your name" />
+          <button id="joinBtn" class="btn-primary">Join Room</button>
+          <button id="leaveBtn" class="btn-secondary" disabled>Leave Room</button>
+        </div>
+        <div id="status" class="status">Disconnected</div>
+        <div id="participants" class="participants"></div>
+      </div>
+
+      <div class="videos">
+        <div class="video-container">
+          <video id="localVideo" autoplay muted playsinline></video>
+          <div class="video-label">You</div>
+        </div>
+        <div class="video-container">
+          <video id="remoteVideo" autoplay playsinline></video>
+          <div class="video-label" id="remoteName">Waiting for participant...</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

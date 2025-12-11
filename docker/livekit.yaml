@@ -1,0 +1,14 @@
+port: 7880
+bind_addresses:
+  - "0.0.0.0"
+
+rtc:
+  port_range_start: 50000
+  port_range_end: 60000
+  use_external_ip: true
+  
+keys:
+  devkey: devsecret
+
+redis:
+  address: livekit-redis:6379
